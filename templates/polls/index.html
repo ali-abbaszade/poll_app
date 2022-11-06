@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Polls Home {% endblock title %}
+
+{% block content %}
+
+<div class="card text-center">
+    <div class="card-body m-4">
+        <h1>Welcome</h1>
+        <h4>Polling app</h4>
+        <a class="btn btn-dark m-3" href="{% url 'polls:poll-list' %}">
+            View Available Polls</a>
+    </div>
+</div>
+
+{% endblock %}

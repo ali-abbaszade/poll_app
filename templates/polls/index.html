@@ -6,10 +6,14 @@
 
 <div class="card text-center">
     <div class="card-body m-4">
-        <h1>Welcome</h1>
-        <h4>Polling app</h4>
-        <a class="btn btn-dark m-3" href="{% url 'polls:poll-list' %}">
-            View Available Polls</a>
+        <h1>Hello {{user.username | default:'Guest'}}</h1>
+        <h4>Welcom to poll app</h4>
+        {% if user.is_authenticated %}
+        <a class="btn btn-dark mt-5 m-1" href="{% url 'polls:poll-list' %}">Veiw Available Polls</a>
+        {% else %}
+        <a class="btn btn-dark mt-5 m-1" href="{% url 'users:login' %}">Login</a>
+        <a class="btn btn-secondary mt-5 m-1" href="{% url 'users:register' %}">Register</a>
+        {% endif %}
     </div>
 </div>
 

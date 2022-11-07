@@ -4,12 +4,6 @@
 {% block content %}
 <a class="btn btn-secondary btn-sm m-3" href="{% url 'polls:poll-list' %}">Back</a>
 
-{% if error_message %}
-<p class="alert alert-danger">
-    <strong>{{ error_message }}</strong>
-</p>
-{% endif %}
-
 <h3 class="text-center m-2">{{question.question_title}}</h3>
 <div class="card m-2 p-4">
     <form action="" method="post">

@@ -2,33 +2,40 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Question
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 def index_view(request):
     return render(request, 'polls/index.html')
 
+@login_required(login_url="users:login")
 def poll_list(request):
     questions = Question.objects.all()
     context = {'questions':questions}
     return render(request, 'polls/poll-list.html', context)        
 
-def vote_view(requests, pk):
+@login_required(login_url="users:login")
+def vote_view(request, pk):
     question = get_object_or_404(Question, id=pk)
     
-    if requests.method == 'POST':
+    if request.method == 'POST':
         try:
-            choice_id = requests.POST['choice']
+            choice_id = request.POST['choice']
             seletcted_item = question.choice_set.get(id=choice_id)
         except:
-            return render(requests, 'polls/vote.html', {'question':question, 'error_message':"You didn't select a choice!"})  
+            messages.error(request, "You didn't select a choice!")
+            return render(request, 'polls/vote.html', {'question':question})  
         else:
             seletcted_item.vote_count += 1
             seletcted_item.save()
             return HttpResponseRedirect(reverse('polls:result', kwargs={'pk':question.id}))
 
     context = {'question':question}
-    return render(requests, 'polls/vote.html', context)   
+    return render(request, 'polls/vote.html', context)   
 
-def result_view(requests, pk):
+@login_required(login_url="users:login")
+def result_view(request, pk):
     question = get_object_or_404(Question, id=pk)
     context = {'question':question}
-    return render(requests, 'polls/result.html', context)
+    return render(request, 'polls/result.html', context)

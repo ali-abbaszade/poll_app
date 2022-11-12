@@ -27,6 +27,7 @@ def vote_view(request, pk):
             messages.error(request, "You didn't select a choice!")
             return render(request, 'polls/vote.html', {'question':question})  
         else:
+            question.voter.add(request.user)
             seletcted_item.vote_count += 1
             seletcted_item.save()
             return HttpResponseRedirect(reverse('polls:result', kwargs={'pk':question.id}))

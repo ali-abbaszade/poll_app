@@ -2,10 +2,15 @@
 
 
 {% block content %}
-<a class="btn btn-secondary btn-sm m-3" href="{% url 'polls:poll-list' %}">Back</a>
 
-<h3 class="text-center m-2">{{question.question_title}}</h3>
-<div class="card m-2 p-4">
+<h3 class="text-center m-5">{{question.question_title}}</h3>
+
+{% if request.user.id in question.voters %}
+<div class="card m-4 p-4">
+    <p class="fs-5 fw-bolder">You have already submitter your vote for this question</p>
+</div>
+{% else %}
+<div class="card m-4 p-4">
     <form action="" method="post">
         {% csrf_token %}
         {% for choice in question.choice_set.all %}
@@ -17,5 +22,9 @@
         <input type="submit" value="Vote" class="btn btn-primary  btn-block mt-3" />
     </form>
 </div>
+{% endif %}
 
+<div class="ms-4">
+    <a class="btn btn-secondary" href="{% url 'polls:poll-list' %}">Back</a>
+</div>
 {% endblock %}

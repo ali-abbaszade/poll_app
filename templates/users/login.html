@@ -4,10 +4,15 @@
 {% block content %}
 
 <div class="container-md p-5">
-    <h1>Login</h1>
+    <h1 class="mb-5">Login</h1>
     <form method="POST" action="{% url 'users:login' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% for field in form %}
+        <div class="mb-3">
+            <label class="form-label">{{field.label}}</label>
+            {{field}}
+        </div>
+        {% endfor %}
         <button class="btn btn-primary" type="submit">Login</button>
     </form>
     <p class="text-center">If you have not an account, <a href="{% url 'users:register' %}">Register</a></p>

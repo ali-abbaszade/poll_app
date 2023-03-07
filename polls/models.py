@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 
 class Question(models.Model):
     voter = models.ManyToManyField(User, blank=True)
@@ -18,7 +19,7 @@ class Question(models.Model):
         return self.question_title
 
 class Choice(models.Model):
-    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', related_name="choices",  on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=255)
     vote_count = models.IntegerField(default=0)
 

@@ -1,25 +1,32 @@
-{% extends 'base.html' %}
-
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h3 class="text-center m-5">{{question.question_title}}</h3>
 
 {% if request.user.id in question.voters %}
 <div class="card m-4 p-4">
-    <p class="fs-5 fw-bolder">You have already submitter your vote for this question</p>
+    <p class="fs-5 fw-bolder">
+        You have already submitter your vote for this question
+    </p>
 </div>
 {% else %}
 <div class="card m-4 p-4">
     <form action="" method="post">
-        {% csrf_token %}
-        {% for choice in question.choice_set.all %}
+        {% csrf_token %} {% for choice in question.choices.all %}
         <div class="form-check">
-            <input type="radio" name="choice" class="form-check-input" value="{{ choice.id }}" />
+            <input
+                type="radio"
+                name="choice"
+                class="form-check-input"
+                value="{{ choice.id }}"
+            />
             <label>{{ choice.choice_text }}</label>
         </div>
         {% endfor %}
-        <input type="submit" value="Vote" class="btn btn-primary  btn-block mt-3" />
+        <input
+            type="submit"
+            value="Vote"
+            class="btn btn-primary btn-block mt-3"
+        />
     </form>
 </div>
 {% endif %}

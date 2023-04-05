@@ -1,10 +1,11 @@
-# Django Polling App
+# Django Polling App(DRF)
 
 The user has to authenticate to show the polls and to vote. If the user already voted can not vote again.
 
 ## Features
 
 -   Django 4.1
+-   Django RestFramework
 -   User authentication
 -   Bootstrap 5
 

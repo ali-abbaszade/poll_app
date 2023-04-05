@@ -13,13 +13,17 @@ class Question(models.Model):
     @property
     def voters(self):
         voters = self.voter.values_list('id', flat=True)
-        return voters      
+        return voters
 
     def __str__(self):
         return self.question_title
 
+
 class Choice(models.Model):
-    question = models.ForeignKey('Question', related_name="choices",  on_delete=models.CASCADE)
+    question = models.ForeignKey('Question',
+                                 related_name="choices",
+                                 on_delete=models.CASCADE
+                                 )
     choice_text = models.CharField(max_length=255)
     vote_count = models.IntegerField(default=0)
 

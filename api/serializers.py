@@ -5,9 +5,11 @@ from polls import models
 
 class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
+        extra_kwargs = {
+            'vote_count': {'read_only': True}
+        }
         model = models.Choice
         fields = ['choice_text', 'vote_count']
-
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -15,4 +17,4 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Question
-        fields = ['question_title', 'choices', 'created_date']
+        fields = ['id', 'question_title', 'choices', 'created_date']

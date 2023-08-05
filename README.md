@@ -4,10 +4,11 @@ The user has to authenticate to show the polls and to vote. If the user already 
 
 ## Features
 
--   Django 4.1
--   Django RestFramework
--   User authentication
--   Bootstrap 5
+- Django 4.1
+- Django RestFramework
+- JWT
+- User authentication
+- Bootstrap 5
 
 ## Demo
 

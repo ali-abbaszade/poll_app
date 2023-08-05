@@ -14,6 +14,10 @@ The user has to authenticate to show the polls and to vote. If the user already 
 
 ![demo](./demo.gif)
 
+## Model Schema
+
+![database schema](./schema.png)
+
 ### Setup
 
 ```

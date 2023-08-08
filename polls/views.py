@@ -1,8 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.shortcuts import get_object_or_404, render, redirect
 
 from .models import Question
 
@@ -33,9 +31,7 @@ def vote_view(request, pk):
             question.voter.add(request.user)
             seletcted_item.vote_count += 1
             seletcted_item.save()
-            return HttpResponseRedirect(
-                reverse("polls:result", kwargs={"pk": question.id})
-            )
+            return redirect("polls:result", question.id)
 
     context = {"question": question}
     return render(request, "polls/vote.html", context)

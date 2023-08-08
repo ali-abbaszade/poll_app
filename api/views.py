@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -43,6 +43,7 @@ def question_vote(request, pk):
 
 @api_view(["POST"])
 def signup_view(request):
+    User = get_user_model()
     try:
         data = request.data
         user = User.objects.create(
